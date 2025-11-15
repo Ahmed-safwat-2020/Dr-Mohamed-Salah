@@ -93,6 +93,11 @@ body {
   opacity: 0;
 }
 
+@media (max-width: 768px) {
+  .main {
+    padding: 75px 0;
+  }
+}
 @media (min-width: 768px), (max-width: 768px) {
   .flex-left {
     text-align: center !important;
