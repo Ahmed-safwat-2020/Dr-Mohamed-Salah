@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ahmed Safwat - Main</title>
+    <title>DR.Mohamed Salah - Main</title>
     <link rel="stylesheet" href="style/bootstrap.min.css">
     <link rel="stylesheet" href="style/font-awesome.min.css">
     <link rel="stylesheet" href="style/layout.css">
@@ -23,7 +23,7 @@
                 <div class="flex">
                     <div class="content">
                         <div class="pad">
-                            <img src="imgs/Ahmed-Safwat.jpg" alt="Ahmed Safwat" title="Ahmed Safwat">
+                            <img src="#" alt="Dr.Mohamed Salah" title="Dr.Mohamed Salah" id="profile-image">
                         </div>
                     </div>
                 </div>
@@ -32,11 +32,11 @@
                 <div class="flex-left">
                     <div class="content-info">
                         <div class="img">
-                            <img class="d-block d-lg-none"  src="imgs/Ahmed-Safwat.jpg" alt="Ahmed Safwat" title="Ahmed Safwat">
+                            <img class="d-block d-lg-none" src="#" alt="Dr.Mohamed Salah" title="Dr.Mohamed Salah" id="mobile-profile-image">
                         </div>
                         <p class="lead">HI THERE !</p>
-                        <h1>I'M <span>AHMED SAFWAT</span></h1>
-                        <P class="about">I'm an Egyptian based web designer & front‑end developer focused on crafting clean & user‑friendly experiences, I am passionate about building excellent software that improves the lives of those around me.</P>
+                        <h1>I'M <span id="hero-name">#  </span></h1>
+                        <P class="about" id="hero-bio">#</P>
                         <a class="btn" href="about.html" class="more">MORE ABOUT ME <i class="fa fa-user fa-lg" aria-hidden="true"></i></a>
                     </div>
                 </div>
@@ -61,11 +61,11 @@
                 <i class="fa fa-briefcase" aria-hidden="true"></i>
             </a>
         </li>
-        <li>
+        <!-- <li>
             <a href="contact.html" title="Contact">
                 <i class="fa fa-envelope-open" aria-hidden="true"></i>
              </a>
-        </li>
+        </li> -->
     </ul>
 </aside>
 <div class="nav-btn d-block d-lg-none">
@@ -94,12 +94,12 @@
                  Portfolio
            </a>
         </li>
-        <li>
+        <!-- <li>
             <a href="contact.html" title="Contact">
                <i class="fa fa-envelope-open " aria-hidden="true"></i>
                  Contact
            </a>
-        </li>
+        </li> -->
     </ul>
    </div>
 </section>
@@ -112,8 +112,54 @@
 --------------------------------------------End Main ---------------------------------------------------
 ----------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------ -->
-    <script  src="js/jquery-3.5.0.min.js"></script>
-    <script  src="js/bootstrap.min.js"></script>   
-    <script  src="js/blugin.js"></script>
+    <script src="js/jquery-3.5.0.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    
+    
+<script>
+    $(document).ready(function() {
+        // إعداد الـ API credentials
+        const supabaseUrl = 'https://adhxwfcdbxwonsnnsjee.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFkaHh3ZmNkYnh3b25zbm5zamVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI4MTk4MjUsImV4cCI6MjA3ODM5NTgyNX0.G1HVqBBoS0SWrBWU_oUxxb9RKCme_v4MOYTjYGI06DI';
+        
+        // جلب البيانات من API باستخدام jQuery Ajax
+        function loadHomeData() {
+            $.ajax({
+                url: supabaseUrl + '/rest/v1/home_page',
+                method: 'GET',
+                headers: {
+                    'apikey': supabaseKey,
+                    'Authorization': 'Bearer ' + supabaseKey,
+                    'Content-Type': 'application/json'
+                },
+                success: function(data) {
+                    if (data && data.length > 0) {
+                        var homeData = data[0];
+                        
+                        // تحديث الصور
+                        $('#profile-image').attr('src', homeData.hero_image);
+                        $('#mobile-profile-image').attr('src', homeData.hero_image);
+                        
+                        // تحديث النصوص
+                        $('#hero-name').text(homeData.name.toUpperCase());
+                        $('#hero-bio').text(homeData.brief_intro);
+                    }
+                    
+                    // إخفاء الـ preloader
+                    $('.preloader').fadeOut(500);
+                },
+                error: function(error) {
+                    console.error('Error loading data:', error);
+                    $('.preloader').fadeOut(500);
+                }
+            });
+        }
+        
+        // تشغيل جلب البيانات
+        loadHomeData();
+    });
+</script>
+    
+    <script src="js/blugin.js"></script>
 </body>
 </html>

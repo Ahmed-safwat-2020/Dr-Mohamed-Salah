@@ -3,13 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ahmed Safwat - Portfolio</title>
+    <title>DR.Mohamed Salah - Portfolio</title>
     <link rel="stylesheet" href="style/bootstrap.min.css">
     <link rel="stylesheet" href="style/font-awesome.min.css">
     <link rel="stylesheet" href="style/layout.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Almarai&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap" rel="stylesheet">
+    <!-- إضافة CSS للـ Lightbox -->
+    <style>
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 9999;
+            cursor: pointer;
+        }
+        .lightbox-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            max-height: 90%;
+            cursor: default;
+            pointer-events: none;
+        }
+        .lightbox-content * {
+            pointer-events: auto;
+        }
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 80vh;
+            display: block;
+            margin: 0 auto;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            z-index: 10000;
+        }
+        .lightbox-description {
+            color: white;
+            text-align: center;
+            margin-top: 20px;
+            background: rgba(0,0,0,0.7);
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            transform: translateY(-50%);
+        }
+        .lightbox-nav button {
+            background: rgba(255,255,255,0.3);
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .lightbox-nav button:hover {
+            background: rgba(255,255,255,0.5);
+        }
+    </style>
 </head>
 <body>
 <!-- -----------------------------------------------------------------------------------------------------
@@ -21,88 +92,26 @@
     <div class="container">
         <h1 class="text-center">WORKS </h1>
         <P class="text-center under">My <span>Portfolio</span></P>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="snake">
-                    <div class="content">
-                        <img src="imgs/home.png" alt="ZigZag" title="ZigZag">
-                        <a class="overlay" href="https://ahmed-safwat-2020.github.io/ZigZag/" target="_blank">
-                            <p class="text-center">
-                                ZigZAG Family
-                                <small class="form-text text-muted">Click To Visit</small>
-                            </p>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="snake">
-                    <div class="content">
-                        <img src="imgs/OnePage-.png" alt="OnePage" title="OnePage">
-                        <a class="overlay" href="https://ahmed-safwat-2020.github.io/OnePage/" target="_blank">
-                            <p class="text-center">
-                                Landing Page
-                                <small class="form-text text-muted">Click To Visit</small>
-                            </p>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="snake">
-                    <div class="content">
-                        <img src="imgs/spa.png" alt="Beauty-spa" title="Beauty-spa">
-                        <a class="overlay" href="https://ahmed-safwat-2020.github.io/Beauty-spa/" target="_blank">
-                            <p class="text-center">
-                                Beauty-spa
-                                <small class="form-text text-muted">Click To Visit</small>
-                            </p>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="snake">
-                    <div class="content">
-                        <img src="imgs/axit.png" alt="Axit" title="Axit">
-                        <a class="overlay" href="https://ahmed-safwat-2020.github.io/Axit/" target="_blank">
-                            <p class="text-center">
-                                Landing Page For Axit
-                                <small class="form-text text-muted">Click To Visit</small>
-                            </p>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="snake">
-                    <div class="content">
-                        <img src="imgs/elite.png" alt="EliteCrop" title="EliteCrop">
-                        <a class="overlay" href="https://ahmed-safwat-2020.github.io/EliteCrop/" target="_blank">
-                            <p class="text-center">
-                                Elite Crop Page
-                                <small class="form-text text-muted">Click To Visit</small>
-                            </p>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="snake">
-                    <div class="content">
-                        <img src="imgs/eduction.png" alt="Education-Assan" title="Education-Assan">
-                        <a class="overlay" href="https://ahmed-safwat-2020.github.io/Education-Assan/" target="_blank">
-                            <p class="text-center">
-                                Education-Assan Page
-                                <small class="form-text text-muted">Click To Visit</small>
-                            </p>
-                        </a>
-                    </div>
-                </div>
-            </div>
+        <div class="row" id="portfolio-container">
+            <!-- المحتوى هيتم تعبئته من الـ API -->
         </div>
     </div>
 </section>
+
+<!-- Lightbox للسلايدر -->
+<div class="lightbox" id="lightbox">
+    <div class="lightbox-close" onclick="closeLightbox()">×</div>
+    <div class="lightbox-content">
+        <img class="lightbox-img" id="lightbox-img" src="" alt="">
+        <div class="lightbox-description" id="lightbox-description"></div>
+    </div>
+    <div class="lightbox-nav">
+        <button onclick="prevImage()">‹ PREVIOUS</button>
+        <button onclick="nextImage()">NEXT ›</button>
+    </div>
+</div>
+
+<!-- باقي الكود بدون تغيير -->
 <aside class=" d-none d-lg-block">
     <ul class="list_unlisted">
         <li>
@@ -120,18 +129,20 @@
                 <i class="fa fa-briefcase active" aria-hidden="true"></i>
             </a>
         </li>
-        <li>
+        <!-- <li>
             <a href="contact.html" title="Contact">
                 <i class="fa fa-envelope-open" aria-hidden="true"></i>
              </a>
-        </li>
+        </li> -->
     </ul>
 </aside>
+
 <div class="nav-btn d-block d-lg-none">
     <div class="line one"></div>
     <div class="line two"></div>
     <div class="line three"></div>
 </div>
+
 <section class="side">
    <div>
     <ul class="list_unlisted">
@@ -145,7 +156,7 @@
             <a href="about.html" title="About">
                <i class="fa fa-user " aria-hidden="true"></i>
             About       
-    </a>
+            </a>
         </li>
         <li class="active">
             <a href="portfolio.html" title="Portfolio">
@@ -153,33 +164,214 @@
                  Portfolio
            </a>
         </li>
-        <li>
+        <!-- <li>
             <a href="contact.html" title="Contact">
                <i class="fa fa-envelope-open " aria-hidden="true"></i>
                  Contact
            </a>
-        </li>
+        </li> -->
     </ul>
    </div>
 </section>
-<div  class="preloader">
+
+<div class="preloader">
     <div class="black_wall"></div>
     <div class="loader"></div>
 </div>
+
 <!-- -----------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------
 --------------------------------------------End Portfolio ---------------------------------------------------
 ----------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------ -->
-    <script  src="js/jquery-3.5.0.min.js"></script>
-    <script  src="js/bootstrap.min.js"></script>
-    <script  src="js/snake.min.js"></script>
-    <script  src="js/blugin.js"></script>
+    <script src="js/jquery-3.5.0.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/snake.min.js"></script>
+    
     <script>
-    $(".snake").snakeify();
-    $(".snake").snakeify({
-        speed: 200
+        // متغيرات عامة للسلايدر
+        let currentProjectImages = [];
+        let currentImageIndex = 0;
+        let currentProjectDescription = '';
+        let currentProjectTitle = '';
+        
+        // إعداد إغلاق الـ lightbox
+        function setupLightboxClose() {
+            // إغلاق عند النقر على الخلفية
+            $('#lightbox').click(function(e) {
+                if (e.target === this) {
+                    closeLightbox();
+                }
+            });
+            
+            // إغلاق عند النقر على زر الإغلاق
+            $('.lightbox-close').click(function(e) {
+                closeLightbox();
+                e.stopPropagation();
+            });
+            
+            // إغلاق عند النقر على ESC
+            $(document).keyup(function(e) {
+                if (e.keyCode === 27) {
+                    closeLightbox();
+                }
+            });
+        }
+        
+        $(document).ready(function() {
+        const supabaseUrl = 'https://adhxwfcdbxwonsnnsjee.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFkaHh3ZmNkYnh3b25zbm5zamVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI4MTk4MjUsImV4cCI6MjA3ODM5NTgyNX0.G1HVqBBoS0SWrBWU_oUxxb9RKCme_v4MOYTjYGI06DI';
+            
+            // إعداد إغلاق الـ lightbox
+            setupLightboxClose();
+            
+            // جلب بيانات Portfolio
+            function loadPortfolio() {
+                fetch(supabaseUrl + '/rest/v1/portfolio?order=created_at', {
+                    method: 'GET',
+                    headers: {
+                        'apikey': supabaseKey,
+                        'Authorization': 'Bearer ' + supabaseKey,
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(projects => {
+                    let portfolioHtml = '';
+                    
+                    projects.forEach(project => {
+                        portfolioHtml += `
+                            <div class="col-md-4">
+                                <div class="snake">
+                                    <div class="content">
+                                        <img src="${project.image_url}" alt="${project.title}" title="${project.title}">
+                                        <a class="overlay" href="#" onclick="openProject(${project.id}, '${project.description.replace(/'/g, "\\'")}', '${project.title.replace(/'/g, "\\'")}'); return false;">
+                                            <p class="text-center">
+                                                ${project.title}
+                                                <small class="form-text text-muted">Click To View</small>
+                                            </p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    
+                    $('#portfolio-container').html(portfolioHtml);
+                    
+                    setTimeout(() => {
+                        $(".snake").snakeify({
+                            speed: 200
+                        });
+                    }, 100);
+                    
+                    $('.preloader').fadeOut(500);
+                })
+                .catch(error => {
+                    console.error('Error loading portfolio:', error);
+                    loadSampleData();
+                    $('.preloader').fadeOut(500);
+                });
+            }
+            
+            // بيانات تجريبية إذا فشل الاتصال بالـ API
+            // بيانات تجريبية إذا فشل الاتصال بالـ API
+            function loadSampleData() {
+                $('#portfolio-container').html(`
+                    <div class="col-12 text-center">
+                        <div style="padding: 80px 20px;">
+                            <i class="fa fa-folder-open fa-4x text-muted mb-4"></i>
+                            <h3 class="text-muted mb-3">No projects available at the moment</h3>
+                            <p class="text-muted">Please check your connection and try again later.</p>
+                        </div>
+                    </div>
+                `);
+                
+                $('.preloader').fadeOut(500);
+            }
+            
+            // تشغيل جلب البيانات
+            loadPortfolio();
         });
+        
+        // فتح مشروع وعرض الصور
+        function openProject(projectId, description, title) {
+        const supabaseUrl = 'https://adhxwfcdbxwonsnnsjee.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFkaHh3ZmNkYnh3b25zbm5zamVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI4MTk4MjUsImV4cCI6MjA3ODM5NTgyNX0.G1HVqBBoS0SWrBWU_oUxxb9RKCme_v4MOYTjYGI06DI';
+            
+            currentProjectDescription = description;
+            currentProjectTitle = title;
+            
+            fetch(supabaseUrl + '/rest/v1/portfolio_images?portfolio_id=eq.' + projectId + '&order=image_order', {
+                method: 'GET',
+                headers: {
+                    'apikey': supabaseKey,
+                    'Authorization': 'Bearer ' + supabaseKey
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(images => {
+                if (images.length > 0) {
+                    currentProjectImages = images;
+                    currentImageIndex = 0;
+                    showImage(0);
+                    $('#lightbox').fadeIn();
+                } else {
+                    alert('No images found for this project');
+                }
+            })
+            .catch(error => {
+                console.error('Error loading images:', error);
+                alert('Error loading project images');
+            });
+        }
+        
+        // عرض صورة في الـ lightbox
+        function showImage(index) {
+            if (currentProjectImages.length > 0) {
+                $('#lightbox-img').attr('src', currentProjectImages[index].image_url);
+                $('#lightbox-description').html(`
+                    <h4>${currentProjectTitle}</h4>
+                    <p>${currentProjectDescription}</p>
+                    <small>Image ${currentImageIndex + 1} of ${currentProjectImages.length}</small>
+                `);
+            }
+        }
+        
+        // الصورة التالية
+        function nextImage() {
+            if (currentProjectImages.length > 0) {
+                currentImageIndex = (currentImageIndex + 1) % currentProjectImages.length;
+                showImage(currentImageIndex);
+            }
+        }
+        
+        // الصورة السابقة
+        function prevImage() {
+            if (currentProjectImages.length > 0) {
+                currentImageIndex = (currentImageIndex - 1 + currentProjectImages.length) % currentProjectImages.length;
+                showImage(currentImageIndex);
+            }
+        }
+        
+        // إغلاق الـ lightbox
+        function closeLightbox() {
+            $('#lightbox').fadeOut();
+            currentProjectImages = [];
+            currentImageIndex = 0;
+        }
     </script>
+    
+    <script src="js/blugin.js"></script>
 </body>
 </html>
