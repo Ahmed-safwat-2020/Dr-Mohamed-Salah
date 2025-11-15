@@ -265,7 +265,6 @@ aside .list_unlisted li a .active {
   font-size: 100px;
   font-weight: bolder;
   opacity: 0.15;
-  overflow: hidden;
 }
 .about .under {
   font-size: 55px;
@@ -424,7 +423,6 @@ aside .list_unlisted li a .active {
   font-size: 120px;
   font-weight: bolder;
   opacity: 0.15;
-  overflow: hidden;
 }
 .Portfolio .under {
   font-size: 55px;
